@@ -1,0 +1,169 @@
+import LinkTo from '@storybook/addon-links/react';
+
+<Meta title="Customization" />
+
+## Customization
+
+Some design aspects of the visualizations, such as the font-size of the tick labels, the color of the title, the color of the axes, etc. are **controlled by CSS**.
+We provide sane defaults that should be sufficient to start with, but at some point
+you might like to tweak a few things so the visualizations integrate better with your app's design.
+
+### Inherited font properties
+
+Font properties (`font-size`, `font-family`, `font-weight`, etc.) of textual elements (tick labels, plot title, etc.) are **inherited by default**, so tweaking them all at once is easy.
+Story <LinkTo kind="Building Blocks/VisCanvas" story="Inherited Styles">_Inherited Styles_</LinkTo> demonstrates this technique. For instance, if you'd like to change the font-size and font-family of the `LineVis`, here is what you could do:
+
+```tsx
+<div className="my-container">
+  <LineVis {...props} />
+</div>
+```
+
+```css
+.my-container {
+  font-family: monospace;
+  font-size: 90%;
+}
+```
+
+### CSS custom properties
+
+For more advanced customization, the library exposes a number of CSS custom properties, which you may use
+as you see fit. For instance, if you'd like to change the color of the curve of the `LineVis`, here is what you could do:
+
+```tsx
+<div className="my-container">
+  <LineVis {...props} />
+</div>
+```
+
+```css
+.my-container {
+  --h5w-line--color: teal;
+}
+
+/* If you want every `LineVis` in your app to have the same curve color, you could even use `:root` */
+:root {
+  --h5w-line--color: teal;
+}
+```
+
+#### Visualizations
+
+| Name                           | Default                    | Description                 |
+| ------------------------------ | -------------------------- | --------------------------- |
+| `--h5w-canvas--bgColor`        | `transparent`              | Background color of canvas  |
+| `--h5w-plotTitle--color`       | `inherit`                  | Text color of plot title    |
+| `--h5w-plotTitle--fontFamily`  | `inherit`                  | Font family of plot title   |
+| `--h5w-plotTitle--fontSize`    | `1.125em`                  | Font size of plot title     |
+| `--h5w-plotTitle--fontWeight`  | `inherit`                  | Font weight of plot title   |
+| `--h5w-ticks--color`           | `gray`                     | Color of ticks              |
+| `--h5w-tickLabels--color`      | `#333`                     | Text color of tick labels   |
+| `--h5w-tickLabels--fontFamily` | `inherit`                  | Font family of tick labels  |
+| `--h5w-tickLabels--fontSize`   | `inherit`                  | Font size of tick labels    |
+| `--h5w-axisLabels--color`      | `#333`                     | Text color of axis labels   |
+| `--h5w-axisLabels--fontFamily` | `inherit`                  | Font family of axis labels  |
+| `--h5w-axisLabels--fontSize`   | `inherit`                  | Font size of axis labels    |
+| `--h5w-axisLabels--fontWeight` | `600`                      | Font weight of axis labels  |
+| `--h5w-grid--color`            | `gray`                     | Color of grid lines         |
+| `--h5w-grid--opacity`          | `0.33`                     | Opacity of grid lines       |
+| `--h5w-tooltip--color`         | `inherit`                  | Text color of tooltip       |
+| `--h5w-tooltip--bgColor`       | `rgba(255, 255, 255, 0.9)` | Background color of tooltip |
+| `--h5w-tooltip--fontFamily`    | `inherit`                  | Font family of tooltip      |
+| `--h5w-tooltip--fontSize`      | `0.75em`                   | Font size of tooltip        |
+| `--h5w-tooltip-guide--color`   | `gray`                     | Color of tooltip guide      |
+| `--h5w-tooltip-guide--width`   | `1.5`                      | Width of tooltip guide      |
+| `--h5w-tooltip-guide--opacity` | `0.5`                      | Opacity of tooltip guide    |
+
+##### Line
+
+| Name                   | Default                                                    | Description                                                                                                                                                                        |
+| ---------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--h5w‑line‑‑color`    | `midnightblue`                                             | Color of main curve and error bars/caps                                                                                                                                            |
+| `--h5w‑line‑‑colorAux` | `orangered, forestgreen, crimson, mediumslateblue, sienna` | Color(s) of auxiliary curves. Accepts a comma-separated list of colors. If the number of colours is lower than the number of auxiliary curves, the last color in the list is used. |
+
+##### Heatmap
+
+| Name                                    | Default                                      | Description                               |
+| --------------------------------------- | -------------------------------------------- | ----------------------------------------- |
+| `--h5w-colorBar-ticks--color`           | `var(--h5w-ticks--color, gray)`              | Color of color bar ticks                  |
+| `--h5w-colorBar-tickLabels--color`      | `var(--h5w-tickLabels--color, #333)`         | Text color of color bar tick labels       |
+| `--h5w-colorBar-tickLabels--fontFamily` | `var(--h5w-tickLabels--fontFamily, inherit)` | Font family of color bar tick labels      |
+| `--h5w-colorBar-tickLabels--fontSize`   | `0.75em`                                     | Font size of color bar tick labels        |
+| `--h5w-colorBar-bounds--color`          | `#333`                                       | Font size of color bar min and max bounds |
+| `--h5w-colorBar-bounds--fontSize`       | `0.875em`                                    | Font size of color bar min and max bounds |
+
+##### Matrix
+
+| Name                                 | Default                                    | Description                           |
+| ------------------------------------ | ------------------------------------------ | ------------------------------------- |
+| `--h5w-matrix--color`                | `inherit`                                  | Text color of matrix vis              |
+| `--h5w-matrix--fontFamily`           | `monospace`                                | Font family of matrix vis             |
+| `--h5w-matrix--fontSize`             | `inherit`                                  | Font size of matrix vis               |
+| `--h5w-matrix-cell--bgColor`         | `transparent`                              | Background colour of even cells       |
+| `--h5w-matrix-cell--bgColorAlt`      | `#eee`                                     | Background colour of odd cells        |
+| `--h5w-matrix-indexCell--bgColor`    | `#eee`                                     | Background colour of even index cells |
+| `--h5w-matrix-indexCell--bgColorAlt` | `lightgray`                                | Background colour of odd index cells  |
+| `--h5w-matrix-indexCell--color`      | `var(--h5w-matrix--color, inherit)`        | Text color of index cells             |
+| `--h5w-matrix-indexCell--fontFamily` | `var(--h5w-matrix--fontFamily, monospace)` | Font family of index cells            |
+| `--h5w-matrix-indexCell--fontSize`   | `var(--h5w-matrix--fontSize, inherit)`     | Font size of index cells              |
+| `--h5w-matrix-indexCell--fontWeight` | `600`                                      | Font weight of index cells            |
+| `--h5w-matrix-anchorCell--bgColor`   | `silver`                                   | Background colour of anchor cell      |
+
+#### UI
+
+| Name                 | Default | Description                                            |
+| -------------------- | ------- | ------------------------------------------------------ |
+| `--h5w-error--color` | `brown` | Color of error messages and UI elements in error state |
+
+##### Toolbar
+
+| Name                             | Default              | Description                 |
+| -------------------------------- | -------------------- | --------------------------- |
+| `--h5w-toolbar--bgColor`         | `aliceblue`          | Background color of toolbar |
+| `--h5w-toolbar-separator--color` | `rgba(0, 0, 0, 0.2)` | Color of toolbar separators |
+
+##### Buttons
+
+| Name                                  | Default                                            | Description                                  |
+| ------------------------------------- | -------------------------------------------------- | -------------------------------------------- |
+| `--h5w-btn-hover--bgColor`            | `whitesmoke`                                       | Background color of buttons on hover         |
+| `--h5w-btn-hover--shadowColor`        | `var(--h5w-btnRaised--shadowColor, gray)`          | Box shadow color of buttons on hover         |
+| `--h5w-btnPressed--bgColor`           | `white`                                            | Background color of pressed buttons          |
+| `--h5w-btnPressed--shadowColor`       | `var(--h5w-btnRaised--shadowColor, gray)`          | Box shadow color of pressed buttons          |
+| `--h5w‑btnPressed‑hover‑‑shadowColor` | `var(--h5w-btnRaised-hover--shadowColor, dimgray)` | Box shadow color of pressed buttons on hover |
+| `--h5w-btnRaised--shadowColor`        | `gray`                                             | Box shadow color of raised buttons           |
+| `--h5w-btnRaised-hover--shadowColor`  | `dimgray`                                          | Box shadow color of raised buttons on hover  |
+
+##### Selectors
+
+| Name                                      | Default      | Description                          |
+| ----------------------------------------- | ------------ | ------------------------------------ |
+| `--h5w-selector-label--color`             | `royalblue`  | Text color of label                  |
+| `--h5w-selector-menu--bgColor`            | `white`      | Background color of menu             |
+| `--h5w-selector-arrowIcon--color`         | `dimgray`    | Color of arrow icon                  |
+| `--h5w-selector-option-hover--bgColor`    | `whitesmoke` | Background color of options on hover |
+| `--h5w-selector-option-selected--bgColor` | `#eee`       | Background color of selected option  |
+| `--h5w-selector-groupLabel--color`        | `gray`       | Text color of group labels in menu   |
+
+##### Domain slider
+
+| Name                                                 | Default                    | Description                                    |
+| ---------------------------------------------------- | -------------------------- | ---------------------------------------------- |
+| `--h5w-domainSlider-track--width`                    | `8rem`                     | Width of track                                 |
+| `--h5w-domainSlider-track--height`                   | `0.625rem`                 | Height of track                                |
+| `--h5w-domainSlider-track--bgColor`                  | `gray`                     | Background color of track                      |
+| `--h5w-domainSlider-track--shadowColor`              | `gray`                     | Box shadow color of track                      |
+| `--h5w-domainSlider-dataTrack--bgColor`              | `royalblue`                | Background color of data track                 |
+| `--h5w-domainSlider-dataTrack--shadowColor`          | `midnightblue`             | Box shadow color of data track                 |
+| `--h5w-domainSlider-thumb--bgColor`                  | `lightgray`                | Background color of thumbs                     |
+| `--h5w-domainSlider-thumb-auto--bgColor`             | `whitesmoke`               | Background color of auto-scaled thumbs         |
+| `--h5w-domainSlider-tooltip--bgColor`                | `rgba(255, 255, 255, 0.9)` | Background color of tooltip                    |
+| `--h5w-domainSlider-tooltip--colorAlt`               | `#333`                     | Text color of bounds and data range in tooltip |
+| `--h5w-domainSlider-boundInput--shadowColor`         | `dimgray`                  | Box shadow color of bound inputs               |
+| `--h5w-domainSlider-boundInput-focus--shadowColor`   | `royalblue`                | Box shadow color of bound inputs on focus      |
+| `--h5w-domainSlider-boundInput-editing--bgColor`     | `white`                    | Background color of bound inputs when editing  |
+| `--h5w-domainSlider-boundInput-editing--borderColor` | `royalblue`                | Border color of bound inputs when editing      |
+| `--h5w-domainSlider-histogram--color`                | `royalblue`                | Fill color of histogram bars                   |
+| `--h5w-domainSlider-histogram-indicator--color`      | `midnightblue`             | Color of histogram indicators                  |
+| `--h5w-domainSlider-histogram-bgColor`               | `white`                    | Background color of histogram                  |

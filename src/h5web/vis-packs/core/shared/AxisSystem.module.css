@@ -1,0 +1,75 @@
+.axisSystem {
+  display: grid;
+  grid-template-areas:
+    '. top-axis .'
+    '. axis-grid right-axis'
+    '. bottom-axis .';
+
+  /* - Prevent panning/zooming from axis when zoomed in.
+   * - Prevent text selection of tick labels when panning with touchpad. */
+  pointer-events: none;
+}
+
+.axisSystem > svg {
+  display: block;
+  overflow: visible;
+
+  /* Avoid potential overflow caused by default intrinsic size of `svg` elements. */
+  /* Chrome/Edge require values greater than 0. */
+  width: 1px;
+  height: 1px;
+}
+
+.axis[data-type='abscissa'] {
+  grid-area: bottom-axis;
+}
+
+.axis[data-type='ordinate'] {
+  grid-area: axis-grid;
+}
+
+.axis > g > line {
+  stroke: var(--h5w-grid--color, gray);
+  stroke-opacity: var(--h5w-grid--opacity, 0.33);
+}
+
+.tick > line {
+  stroke: var(--h5w-ticks--color, gray);
+}
+
+.tick > text {
+  fill: currentColor;
+  color: var(--h5w-tickLabels--color, #333);
+  font-family: var(--h5w-tickLabels--fontFamily, inherit);
+  font-size: var(--h5w-tickLabels--fontSize, inherit);
+}
+
+.label {
+  fill: currentColor;
+  color: var(--h5w-axisLabels--color, #333);
+  font-family: var(--h5w-axisLabels--fontFamily, inherit);
+  font-size: var(--h5w-axisLabels--fontSize, inherit);
+  font-weight: var(--h5w-axisLabels--fontWeight, 600);
+  text-anchor: middle;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: top-axis;
+  margin-bottom: 0;
+  color: var(--h5w-plotTitle--color, inherit);
+  font-family: var(--h5w-plotTitle--fontFamily, inherit);
+  font-size: var(--h5w-plotTitle--fontSize, 1.125em);
+  font-weight: var(--h5w-plotTitle--fontWeight, inherit);
+}
+
+.grid {
+  grid-area: axis-grid;
+}
+
+.grid line {
+  stroke: var(--h5w-grid--color, gray);
+  stroke-opacity: var(--h5w-grid--opacity, 0.33);
+}

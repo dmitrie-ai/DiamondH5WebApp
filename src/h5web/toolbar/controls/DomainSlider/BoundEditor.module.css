@@ -1,0 +1,61 @@
+.boundEditor {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+}
+
+.label {
+  width: 2.5em;
+  margin: 0 1rem 0 0;
+  text-transform: uppercase;
+  font-size: inherit;
+  color: var(--h5w-domainSlider-tooltip--colorAlt, #333);
+}
+
+.value {
+  flex: 1 0 auto;
+  width: 8.5em; /* -9.99999e+999 without overflowing */
+  margin-right: 0.375rem;
+  padding: 0.25rem 0.375rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid transparent;
+  border-radius: 0.125rem;
+  box-shadow: 0 0 2px var(--h5w-domainSlider-boundInput--shadowColor, dimgray);
+  text-align: right;
+  color: var(--h5w-domainSlider-tooltip--colorAlt, #333);
+  font-weight: inherit;
+  line-height: inherit;
+  transition: background-color 0.05s ease-in-out, box-shadow 0.05s ease-in-out;
+  cursor: text;
+}
+
+.value:hover {
+  box-shadow: 1px 1px 2px 1px
+    var(--h5w-domainSlider-boundInput--shadowColor, dimgray);
+}
+
+.value:focus,
+.boundEditor[data-editing='true'] .value:hover {
+  box-shadow: 1px 1px 2px 1px
+    var(--h5w-domainSlider-boundInput-focus--shadowColor, royalblue);
+  outline: none;
+}
+
+.boundEditor[data-error] .label,
+.boundEditor[data-error] .value {
+  color: var(--h5w-error--color, brown);
+}
+
+.boundEditor[data-editing='true'] .value {
+  background-color: var(--h5w-domainSlider-boundInput-editing--bgColor, white);
+  border-color: var(
+    --h5w-domainSlider-boundInput-editing--borderColor,
+    royalblue
+  );
+  outline: none;
+}
+
+.actionBtn {
+  composes: actionBtn from './DomainTooltip.module.css';
+}

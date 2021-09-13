@@ -1,0 +1,96 @@
+.colorBar {
+  position: relative;
+  z-index: 0; /* stacking context */
+  display: grid;
+  padding: 1rem;
+}
+
+.colorBar:not([data-horizontal]) {
+  grid-template-rows: min-content 1fr min-content;
+  grid-template-columns: 2.25rem 2.75rem;
+  grid-template-areas:
+    'max .'
+    'gradient axis'
+    'min .';
+}
+
+.colorBar[data-horizontal] {
+  height: 7rem;
+  grid-template-rows: 2.25rem 2.5rem;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-areas:
+    'min gradient max'
+    '. axis .';
+}
+
+.gradientBar {
+  grid-area: gradient;
+  display: flex;
+  border: 1px solid currentColor;
+  z-index: 1; /* above axis ticks */
+}
+
+.gradient {
+  flex: 1 1 0%;
+  background-repeat: no-repeat; /* fix subtle bug where gradient is repeated over 1px */
+}
+
+.axis {
+  grid-area: axis;
+  display: block;
+  overflow: visible;
+  transform: translateY(0.5px); /* fix sub-pixel misalignment */
+}
+
+.tick line {
+  stroke: var(--h5w-colorBar-ticks--color, var(--h5w-ticks--color, gray));
+}
+
+.tick text {
+  fill: currentColor;
+  color: var(
+    --h5w-colorBar-tickLabels--color,
+    var(--h5w-tickLabels--color, #333)
+  );
+  font-family: var(
+    --h5w-colorBar-tickLabels--fontFamily,
+    var(--h5w-tickLabels--fontFamily, inherit)
+  );
+  font-size: var(--h5w-colorBar-tickLabels--fontSize, 0.75em);
+}
+
+.bound {
+  display: inline-flex;
+  align-self: center;
+  justify-content: center;
+  color: var(--h5w-colorBar-bounds--color, #333);
+  font-size: var(--h5w-colorBar-bounds--fontSize, 0.875em);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.minBound {
+  composes: bound;
+  grid-area: min;
+  margin: 0.5rem 0 -0.25rem;
+}
+
+.maxBound {
+  composes: bound;
+  grid-area: max;
+  margin: -0.25rem 0 0.5rem;
+}
+
+.colorBar[data-horizontal] .bound {
+  min-width: 3.75em; /* keep bounds equal on both sides in most cases */
+}
+
+.colorBar[data-horizontal] .minBound {
+  justify-content: flex-end;
+  margin: 0 0.5rem 0 -0.25rem;
+}
+
+.colorBar[data-horizontal] .maxBound {
+  justify-content: flex-start;
+  margin: 0 -0.25rem 0 0.5rem;
+}

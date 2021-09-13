@@ -1,0 +1,11 @@
+.selectorWrapper {
+  display: flex;
+}
+
+.gradient {
+  position: relative;
+  top: 1px;
+  width: 2rem;
+  height: 1.25em;
+  margin-left: 0.625rem;
+}
